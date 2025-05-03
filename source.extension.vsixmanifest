@@ -3,7 +3,7 @@
     <Metadata>
         <Identity Id="SQLOperator.76847c5c-44dc-4e0f-84f1-670b06d840a3" Version="1.0" Language="en-US" Publisher="Sean Gallardy" />
         <DisplayName>SQLOperator</DisplayName>
-        <Description xml:space="preserve">SQL Operator is a SSMS extension that helps DBAs, SysAdmins, and Developers automate, identify, and diagnose SQL Server related tasks and issues, simplifying life. This extension includes heavy use of AI (Actual Intelligence).SQL </Description>
+        <Description xml:space="preserve">SQL Operator is a SSMS extension that helps DBAs, SysAdmins, and Developers automate, identify, and diagnose SQL Server related tasks and issues, simplifying life. This extension includes heavy use of AI (Actual Intelligence).</Description>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">
