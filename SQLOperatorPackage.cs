@@ -4,6 +4,8 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using SQLOperator.Options;
+using SQLOperator.Services;
 using Task = System.Threading.Tasks.Task;
 
 namespace SQLOperator
@@ -14,6 +16,7 @@ namespace SQLOperator
 
 	[PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
 	[Guid(SQLOperatorPackage.PackageGuidString)]
+	[ProvideOptionPage(typeof(OperatorGeneralOptionsPage), "SQLOperator", "General", 0, 0, true)]
 	//This is the GUID for object explorer taken from the registry
 	[ProvideAutoLoad("d114938f-591c-46cf-a785-500a82d97410", PackageAutoLoadFlags.BackgroundLoad)]
 	public sealed class SQLOperatorPackage : AsyncPackage
@@ -37,6 +40,13 @@ namespace SQLOperator
 			// When initialized asynchronously, the current thread may be a background thread at this point.
 			// Do any initialization that requires the UI thread after switching to the UI thread.
 			await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+
+			ServiceManager sm = new ServiceManager();
+
+			OptionsManager optionsManager = new OptionsManager();
+			optionsManager.Initialize(this);
+			
+			sm.RegisterService<IOptionsService>(optionsManager);
 		}
 
 		#endregion
