@@ -2,8 +2,10 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Threading;
+using Microsoft.Build.Framework;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using SQLOperator.Logging;
 using SQLOperator.Options;
 using SQLOperator.Services;
 using Task = System.Threading.Tasks.Task;
@@ -45,8 +47,14 @@ namespace SQLOperator
 
 			OptionsManager optionsManager = new OptionsManager();
 			optionsManager.Initialize(this);
-			
+
+			LoggingManager loggingManager = new LoggingManager();
+			loggingManager.Initialize(this);
+			Logging.ILogger outputPaneLogger = LoggerFactory.CreateNewLogger<OutputWindowLogger>(this);
+			loggingManager.SetDefaultLogger(outputPaneLogger);
+
 			sm.RegisterService<IOptionsService>(optionsManager);
+			sm.RegisterService<ILoggingService>(loggingManager);
 		}
 
 		#endregion
